@@ -103,9 +103,50 @@ window.addEventListener("DOMContentLoaded", () => {
 	setClock(".timer", deadLine);
 
 
+	//Modal
+
+	const modalTrigger = document.querySelectorAll("[data-modal]"),
+	 	  modal = document.querySelector(".modal"),
+		  modalCloseBtn = document.querySelector("[data-close]");
+
+	modalTrigger.forEach(btn => {
+		btn.addEventListener("click", () => {
+			//первый способ
+			modal.classList.add("show");
+			modal.classList.remove("hide");
+			//второй способ
+			// modal.classList.toggle("show");
+	
+			document.body.style.overflow = "hidden";//убираем прокрутку страницы при открытом модальном окне
+		});
+	});
 
 
+	function closeModal() {
+		//первый способ
+		modal.classList.add("hide");
+		modal.classList.remove("show");
+		//второй способ
+		// modal.classList.toggle("show");
+		
+		document.body.style.overflow = "";//восстанавливаем прокрутку при закрытии модального
+	}
 
+
+	modalCloseBtn.addEventListener("click", closeModal);
+	//модальное окно закрывается при клике крестик
+	
+	modal.addEventListener("click", (e) => {
+		if (e.target === modal) {
+			closeModal();
+		}//модальное окно закрывается при клике на подложку
+	});
+
+	document.addEventListener("keydown", (e) => {
+		if (e.code === "Escape" && modal.classList.contains("show")) {
+			closeModal();
+		}//модальное окно закрывается при клике на 'Esc'
+	});
 
 
 });
