@@ -108,19 +108,21 @@ window.addEventListener("DOMContentLoaded", () => {
 	const modalTrigger = document.querySelectorAll("[data-modal]"),
 	 	  modal = document.querySelector(".modal"),
 		  modalCloseBtn = document.querySelector("[data-close]");
+	
+	function openModal() {
+		//первый способ
+		modal.classList.add("show");
+		modal.classList.remove("hide");
+		//второй способ
+		// modal.classList.toggle("show");
+
+		document.body.style.overflow = "hidden";//убираем прокрутку страницы при открытом модальном окне
+		clearInterval(modalTimerId);//отменяет ооткрытие окна по таймеру, если пользователь сам его уже открывал ранее
+	}
 
 	modalTrigger.forEach(btn => {
-		btn.addEventListener("click", () => {
-			//первый способ
-			modal.classList.add("show");
-			modal.classList.remove("hide");
-			//второй способ
-			// modal.classList.toggle("show");
-	
-			document.body.style.overflow = "hidden";//убираем прокрутку страницы при открытом модальном окне
-		});
+		btn.addEventListener("click", openModal);
 	});
-
 
 	function closeModal() {
 		//первый способ
@@ -135,7 +137,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	modalCloseBtn.addEventListener("click", closeModal);
 	//модальное окно закрывается при клике крестик
-	
+
 	modal.addEventListener("click", (e) => {
 		if (e.target === modal) {
 			closeModal();
@@ -148,5 +150,19 @@ window.addEventListener("DOMContentLoaded", () => {
 		}//модальное окно закрывается при клике на 'Esc'
 	});
 
+	const modalTimerId = setTimeout(openModal, 5000);
+
+	function showModalByScroll() {
+		if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight -0.5) {
+			//Модальное окно появляется при прокрутки страницы до конца
+			openModal();
+			window.removeEventListener("scroll", showModalByScroll);
+			//после одного раза событие удаляется
+
+		}
+
+	}
+
+	window.addEventListener("scroll", showModalByScroll);
 
 });
