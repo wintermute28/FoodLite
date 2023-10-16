@@ -1,11 +1,13 @@
+import tabs from "./modules/tabs";
+import modal from "./modules/modal";
+import timer from "./modules/timer";
+import cards from "./modules/cards";
+import forms from "./modules/forms";
+import calc from "./modules/calc";
+import slider from "./modules/slider";
+
 window.addEventListener("DOMContentLoaded", () => {
-	const tabs = require("./modules/tabs"),
-		  modal = require("./modules/modal"),
-		  timer = require("./modules/timer"),
-		  cards = require("./modules/cards"),
-		  forms = require("./modules/forms"),
-		  calc = require("./modules/calc"),
-		  slider = require("./modules/slider");
+
 
 	tabs();
 	modal();

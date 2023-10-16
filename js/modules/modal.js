@@ -1,34 +1,37 @@
+function openModal() {
+	//первый способ
+	modal.classList.add("show");
+	modal.classList.remove("hide");
+	//второй способ
+	// modal.classList.toggle("show");
+
+	document.body.style.overflow = "hidden";//убираем прокрутку страницы при открытом модальном окне
+	clearInterval(modalTimerId);//отменяет ооткрытие окна по таймеру, если пользователь сам его уже открывал ранее
+}
+
+function closeModal() {
+	//первый способ
+	modal.classList.add("hide");
+	modal.classList.remove("show");
+	//второй способ
+	// modal.classList.toggle("show");
+
+	document.body.style.overflow = "";//восстанавливаем прокрутку при закрытии модального
+}
+
+
+
 function modal() {
 	//Modal
 
 	const modalTrigger = document.querySelectorAll("[data-modal]"),
 		modal = document.querySelector(".modal");
 
-
-	function openModal() {
-		//первый способ
-		modal.classList.add("show");
-		modal.classList.remove("hide");
-		//второй способ
-		// modal.classList.toggle("show");
-
-		document.body.style.overflow = "hidden";//убираем прокрутку страницы при открытом модальном окне
-		clearInterval(modalTimerId);//отменяет ооткрытие окна по таймеру, если пользователь сам его уже открывал ранее
-	}
-
 	modalTrigger.forEach(btn => {
 		btn.addEventListener("click", openModal);
 	});
 
-	function closeModal() {
-		//первый способ
-		modal.classList.add("hide");
-		modal.classList.remove("show");
-		//второй способ
-		// modal.classList.toggle("show");
- 
-		document.body.style.overflow = "";//восстанавливаем прокрутку при закрытии модального
-	}
+
 
 
 	// modalCloseBtn.addEventListener("click", closeModal);
@@ -62,4 +65,6 @@ function modal() {
 	window.addEventListener("scroll", showModalByScroll);
 }
 
-module.exports = modal;
+export default modal;
+export {closeModal};
+export {openModal};
